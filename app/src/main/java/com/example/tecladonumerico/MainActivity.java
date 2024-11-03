@@ -1,26 +1,23 @@
 package com.example.tecladonumerico;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "TecladoNumerico";
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Configuramos todos los botones
+        // Configurar botones y registrarlos para escuchar eventos
         setupBotones();
     }
 
     private void setupBotones() {
-        // Botones de números y operaciones
         int[] buttonIds = {
                 R.id.buttonNumLock, R.id.buttonDivide, R.id.buttonMultiply, R.id.buttonMinus,
                 R.id.button7, R.id.button8, R.id.button9, R.id.buttonPlus,
@@ -31,13 +28,14 @@ public class MainActivity extends AppCompatActivity {
 
         for (int id : buttonIds) {
             Button button = findViewById(id);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Button b = (Button) v;
-                    Log.i(TAG, "Botón pulsado: " + b.getText().toString());
-                }
-            });
+            button.setOnClickListener(this); // Registra MainActivity como el listener
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        // Mostrar un Toast con el texto del botón pulsado
+        Button button = (Button) v;
+        Toast.makeText(this, "Botón pulsado: " + button.getText(), Toast.LENGTH_SHORT).show();
     }
 }
