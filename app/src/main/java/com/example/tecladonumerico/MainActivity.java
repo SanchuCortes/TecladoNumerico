@@ -27,16 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
         for (int id : buttonIds) {
             Button button = findViewById(id);
-            button.setOnClickListener(new ReceptorBoton()); // Registra la clase interna como listener
-        }
-    }
-
-    // Clase interna que implementa el listener
-    private class ReceptorBoton implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Button button = (Button) v;
-            Toast.makeText(MainActivity.this, "Botón pulsado: " + button.getText(), Toast.LENGTH_SHORT).show();
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Button b = (Button) v;
+                    Toast.makeText(MainActivity.this, "Botón pulsado: " + b.getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
